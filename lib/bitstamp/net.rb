@@ -31,9 +31,9 @@ module Bitstamp
         options[:nonce] = Time.now.to_i.to_s
         options[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
       end
-      RestClient.execute(method:  verb.downcase.to_sym,
-                         url:     self.to_uri(path),
-                         params:  options)
+      RestClient::Request.execute(method:  verb.downcase.to_sym,
+                                  url:     self.to_uri(path),
+                                  params:  options)
     end
 
     def self.get(path, options={})
