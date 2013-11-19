@@ -32,7 +32,7 @@ module Bitstamp
         options[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
       end
       options[:method] = verb.downcase.to_sym
-      options[:url] = self.to_uri(path
+      options[:url] = self.to_uri(path)
       RestClient::Request.execute(options)
         #method:  verb.downcase.to_sym,
         #                          url:     self.to_uri(path),
