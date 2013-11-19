@@ -33,8 +33,7 @@ module Bitstamp
       end
       RestClient.execute(method:  verb.downcase.to_sym,
                          url:     self.to_uri(path),
-                         params:  options,
-                         headers: headers)
+                         params:  options)
     end
 
     def self.get(path, options={})
