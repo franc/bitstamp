@@ -1,13 +1,13 @@
-ruby '1.9.3'
+ruby '2.0.0'
 
 source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 # Example:
 #   gem "activesupport", ">= 2.3.5"
-gem "activemodel", ">= 3.1"
-gem "activesupport", ">= 3.1"
-gem 'curb', '> 0.8.1'
-gem "ruby-hmac", "0.4.0"
+gem "activemodel"
+gem "activesupport"
+gem 'rest-client'
+gem "ruby-hmac"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

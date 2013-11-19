@@ -1,7 +1,7 @@
 require 'active_support/core_ext'
 require 'active_support/inflector'
 require 'active_model'
-require 'curb'
+require 'rest-client'
 require 'hmac-sha2'
 
 require 'bitstamp/net'

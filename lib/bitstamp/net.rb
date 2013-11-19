@@ -5,6 +5,8 @@ module Bitstamp
     end
 
     def self.curl(verb, path, options={})
+      self.rest(verb, path, options)  
+=begin
       verb = verb.upcase.to_sym
 
       c = Curl::Easy.new(self.to_uri(path))
@@ -20,6 +22,19 @@ module Bitstamp
       c.http(verb)
 
       return c
+=end
+    end
+
+    def self.rest(verb, path, options={})
+      if Bitstamp.configured?
+        options[:key] = Bitstamp.key
+        options[:nonce] = Time.now.to_i.to_s
+        options[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
+      end
+      RestClient.execute(method:  verb.downcase.to_sym,
+                         url:     self.to_uri(path),
+                         params:  options,
+                         headers: headers)
     end
 
     def self.get(path, options={})
