@@ -69,7 +69,7 @@ module Bitstamp
     end
 
     class FakeResult
-      attr_accessor: body_str
+      attr_accessor :body_str
       def initialize(r)
         @body_str = r
       end
