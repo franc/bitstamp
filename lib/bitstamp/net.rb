@@ -25,19 +25,23 @@ module Bitstamp
 =end
     end
 
-    def self.rest(verb, path, options={})
+    def self.rest(verb, path, params={})
+      params = {}
       if Bitstamp.configured?
-        options[:key] = Bitstamp.key
-        options[:nonce] = Time.now.to_i.to_s
-        options[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
+        params[:key] = Bitstamp.key
+        params[:nonce] = Time.now.to_i.to_s
+        params[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
       end
       options[:method] = verb.downcase.to_sym
       options[:url] = self.to_uri(path)
-      RestClient::Request.execute(options)
+      options[:payload] = params
+      options[:params] = params
+      result = RestClient::Request.execute(options)
         #method:  verb.downcase.to_sym,
         #                          url:     self.to_uri(path),
         #                          params:  options,
         #                          payload: options)
+      Json.parse(result)
     end
 
     def self.get(path, options={})
