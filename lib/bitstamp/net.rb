@@ -26,7 +26,7 @@ module Bitstamp
     end
 
     def self.rest(verb, path, params={})
-      params = {}
+      options = {}
       if Bitstamp.configured?
         params[:key] = Bitstamp.key
         params[:nonce] = Time.now.to_i.to_s
