@@ -41,7 +41,7 @@ module Bitstamp
         #                          url:     self.to_uri(path),
         #                          params:  options,
         #                          payload: options)
-      result
+      FakeResult.new(result)
     end
 
     def self.get(path, options={})
@@ -66,6 +66,13 @@ module Bitstamp
       request = self.curl(:DELETE, path, options)
 
       return request
+    end
+
+    class FakeResult
+      attr_accessor: body_str
+      def initialize(r)
+        @body_str = r
+      end
     end
   end
 end
