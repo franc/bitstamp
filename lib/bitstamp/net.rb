@@ -30,7 +30,7 @@ module Bitstamp
       if Bitstamp.configured?
         params[:key] = Bitstamp.key
         params[:nonce] = Time.now.to_i.to_s
-        params[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, options[:nonce]+Bitstamp.client_id+options[:key]).upcase
+        params[:signature] = HMAC::SHA256.hexdigest(Bitstamp.secret, params[:nonce]+Bitstamp.client_id+params[:key]).upcase
       end
       options[:method] = verb.downcase.to_sym
       options[:url] = self.to_uri(path)
