@@ -41,7 +41,7 @@ module Bitstamp
         #                          url:     self.to_uri(path),
         #                          params:  options,
         #                          payload: options)
-      JSON.parse(result)
+      result
     end
 
     def self.get(path, options={})
